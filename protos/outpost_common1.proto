@@ -1,0 +1,168 @@
+syntax = "proto3";
+option java_package ="com.wolves.outpost.pb";
+option java_multiple_files = true;
+
+message OsProcess {
+     int32 processId =1;
+     int32 parentProcessId =2;
+     string priority =3;
+     string name  =4;
+     string path =5;
+     string commandLine =6;
+     string userId =7;
+     string  user =8;
+     string groupId =9;
+     string  group =10;
+     string  processStat =11;
+     int64 kernelTime =12;
+     int64    userTime = 13;
+     int64   upTime= 14;
+     int64  residentSetSize= 15;
+     int64   virtualSize= 16;
+     int64   threadCount= 17;
+     int64   bytesRead= 18;
+     int64   bytesWritten= 19;
+
+}
+
+message OsFileStore{
+     string  name =1;
+     string  volume =2;
+     string description =3;
+     string    fsType = 4;
+     string   uuid= 5;
+     int64  usableSpace= 6;
+     int64  totalSpace= 7;
+}
+
+message FileSystem{
+     int64  openFileDescriptors= 1;
+     int64  maxFileDescriptors= 2;
+     repeated OsFileStore osFileStores =3 ;
+}
+
+message NetworkParams{
+     string  hostName =1;
+     repeated string  domainName =2;
+     string dnsServers =3;
+     string  ipv4DefaultGateway = 4;
+     string ipv6DefaultGateway= 5;
+}
+message OsVersion{
+     string  version =1;
+     string  codeName =2;
+     string buildNumber =3;
+}
+
+message Os{
+     string  family =1;
+     string  processCount =2;
+     string threadCount =3;
+     repeated OsProcess  osProcesz = 4;
+     FileSystem fileSystem =5 ;
+     NetworkParams networkParams =6;
+}
+
+message Firmware{
+     string  manufacturer =1;
+     string  name =2;
+     string description =3;
+     string  version =4;
+     string  releasDate =5;
+}
+
+message Baseboard{
+     string  manufacturer =1;
+     string  model=2;
+     string version =3;
+     string  serialNumber=4;
+}
+
+message LoadFactor{
+     int64  user =1;
+     int64  nice =2;
+     int64 sys =3;
+     int64 idle = 4;
+     int64 iowait =5 ;
+     int64 irq =6;
+     int64 softIrq =7;
+}
+
+message Cpu{
+     string  name =1;
+     string  family =2;
+     string model =3;
+     string vendor = 4;
+     int64 vendorFreq =5 ;
+     int32 physicalProcessorCount =6;
+     int32 logicalProcessorCount =7;
+     string identifier=8 ;
+     string processorId=9;
+     double systemCpuLoad=10;
+     double systemUpTime=11;
+     LoadFactor loadFactor =12;
+}
+
+message Memory{
+     int64  total =1;
+     int64  available =2;
+     int64 swapTotal=3;
+     int64 swapUsed = 4;
+
+}
+
+message HwDiskStore{
+     string  model =1;
+     string  name =2;
+     string serial =3;
+     int64 size = 4;
+     int64 reads =5 ;
+     int64 readBytes =6;
+     int64 writes =7;
+     int64 writeBytes = 8;
+     int64 transferTime =9 ;
+     repeated HwPartition hwPartition =10;
+}
+
+message HwPartition{
+     string  identification=1;
+     string  name =2;
+     string type =3;
+     string uuid = 4;
+     int64 size =5 ;
+     int32 minor =6;
+     int32 major =7;
+     string mountPoint =8;
+}
+
+message NetworkIf{
+     string  name=1;
+     string  displayName =2;
+     string mac =3;
+     int32 mtu = 4;
+     int64 speed =5 ;
+     repeated string ipv4 =6;
+     repeated  string ipv6 =7;
+     int64 bytesRecv =8;
+     int64 bytesSent = 9;
+     int64 packetsRecv =10 ;
+     int64 packetsSent =11;
+     int64 inErrors =12;
+     int64 outErrors =13;
+}
+
+message Server{
+     string  manufacturer =1;
+     string  model =2;
+     string serialNumber =3;
+     Baseboard baseboard =4;
+     Cpu cpu =5;
+     Memory memory =6;
+     repeated HwDiskStore hwDiskStore = 7;
+     repeated NetworkIf networkIf =8 ;
+     Os os =9;
+     int64 updateTime =10;
+
+}
+
+

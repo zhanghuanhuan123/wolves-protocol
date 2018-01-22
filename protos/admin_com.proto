@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+option java_package = "com.wolves.admin.pb";
+
+option java_multiple_files = true;
+import "outpost_common1.proto";
+import "admin_common.proto";
+message PushServerResponse {
+
+}
+message PushServerRequest {
+    Server server= 1;
+}
+message GetServersResponse {
+   repeated Server servers =1;
+}
+message GetServersRequest {
+    repeated string ips =1;
+}
+
+message  GetNgStatuzResponse {
+    repeated NodeGroup nodeGroups=1;
+}
+message GetNgStatuzRequest {
+    Server server= 1;
+}
+
+
+
+message GetNodeHisResponse {
+    repeated NodeStatus nodeStatuz= 1;
+}
+
+message GetNodeHisRequest {
+     int64 start=1;
+     int64 end=2;
+     string ngLabel=3;
+     string ngVersion=4;
+     string ip=5;
+     int32 port=6;
+}
+
+message GetPortResponse {
+     int32 servicePort= 1;
+}
+message GetPortRequest {
+     string localip=1;
+     repeated  int32 failedPorts=2;
+}
+
+message SetConfigResponse {
+}
+message SetConfigRequest {
+     string ngLabel=1;
+     string ngVersion=2;
+     BaseNodeConfig nodeConfig=3;
+}
+message GetConfigResponse {
+     BaseNodeConfig nodeConfig=1;
+}
+message GetConfigRequest {
+     string ngLabel=1;
+     string ngVersion=2;
+     string ip=3;
+}
+
+message WhereIsResponse {
+     repeated Node nodes=1;
+}
+message WhereIsRequest {
+     string ngLabel=1;
+     string ngVersion=2;
+}
+
+message PingResponse {
+}
+message PingRequest {
+      Node node=1;
+}

@@ -1,0 +1,1 @@
+protoc --proto_path=protos/   --java_out=src/main/java  protos/*.proto

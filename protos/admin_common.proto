@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+option java_package = "com.wolves.admin.pb";
+option java_outer_classname = "AdminCommon";
+option java_multiple_files = true;
+message NodeStatus{
+    int64 collectTime = 1;
+    NodeStatusEnum nodeStatus= 2;
+    repeated InterfaceStatus interfaceStatus =3;
+
+}
+enum NodeStatusEnum{
+    NA=0;
+    OFF=1;
+    STANDBY=2;
+    READY=3;
+    ON=4;
+}
+
+message InterfaceStatus {
+    string action=1;
+    string actVersion=2;
+    int32 jams=3;
+    int32 avaiCostsPerMin_=4;
+    int32 avaiHitsPerMin=5;
+}
+enum Protocol {
+    TCP=0;
+    UDP=1;
+}
+message Node {
+
+    string ip=1;
+    Protocol protocol=2;
+    int32 port=3;
+    string ngLabel=4;
+    string ngVersion=5;
+    int64 recordTime=6;
+    NodeStatus nodeStatus=7;
+    int32 loadFactor=8;
+    int32 serverTimeout=9;
+    int32 clientTimeout=10;
+    int32 clientSize=11;
+    int32 clientSizeMax=12;
+    BaseNodeConfig nodeConfig =13;
+    string pid =14;
+}
+message File{
+      string fileName=1;
+      bytes fileContent =2;
+}
+
+message BaseNodeConfig {
+     int32 servicePort = 1 ;
+     int32 serverSize = 2;
+     int32 serverSizeMax = 3;
+     int32 serverTimeout = 4;
+     int32 clientTimeout = 5;
+     int32 pingAdminInterval =6 ;
+     repeated File confFiles3Rd = 7;
+     repeated string whiteIps =8;
+     int32  messageSizeMax=9;
+
+}
+
+message NodeGroup {
+      string ngLabel=1;
+      string ngVersion=2;
+      repeated Node nodes = 3;
+}

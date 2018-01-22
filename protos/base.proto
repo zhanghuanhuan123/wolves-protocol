@@ -1,0 +1,38 @@
+syntax = "proto3";
+option java_package = "com.wolves.framework.pb";
+option java_multiple_files = true;
+import "any.proto";
+message TimeStack {
+     string ngLabel= 1;
+     string ngVersion = 2;
+     string ip = 3;
+     int32 port = 4;
+     string action = 5;
+     string actVersion = 6;
+     int64 time = 7;
+     repeated TimeStack children_ = 8;
+}
+
+message DafRequest {
+    string  ngLabel = 1;
+    string  ngVersion = 2;
+    string  action = 3;
+    string  actVersion = 4;
+    string  fromNg = 5;
+    string  fromNgVersion = 6;
+    string  fromIp = 7;
+    google.protobuf.Any body= 8 ;
+}
+message DafResponse {
+      string code =1;
+      string  desc =2 ;
+      TimeStack responseTimeStack =3;
+      google.protobuf.Any body= 4;
+}
+message DafPingRequest{
+
+}
+message DafPingResponse {
+     int64  timeInMs = 1;
+
+}

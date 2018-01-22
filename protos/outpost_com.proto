@@ -1,0 +1,44 @@
+syntax = "proto3";
+option java_package ="com.wolves.outpost.pb";
+option java_multiple_files = true;
+import "outpost_common1.proto";
+message GetProcessRequest {
+     int32 orderBy = 1;
+     string grepBy = 2;
+     int32 returnCount = 3;
+}
+
+message GetProcessResponse {
+     repeated OsProcess process =1;
+}
+
+message PrePushFileRequest {
+     string path = 1;
+     int32 size =2;
+     string md5=3;
+     string  user=4;
+     string group=5;
+}
+
+message PrePushFileResponse {
+     string  pushId  = 1;
+}
+
+message PushFileRequest {
+     string pushId = 1;
+     int32 seq =2;
+     bytes data=3;
+}
+
+message PushFileResponse {
+}
+
+message RemoteExeRequest {
+     string user = 1;
+     string onPath =2;
+     string command=3;
+}
+
+message RemoteExeResponse {
+     string  response  = 1;
+}

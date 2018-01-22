@@ -1,0 +1,11 @@
+syntax = "proto3";
+option java_package ="com.wolves.admin.pb";
+option java_outer_classname = "AdminStore";
+
+option java_multiple_files = true;
+import "admin_common.proto";
+message NodeHistory {
+     Node sysNode = 1;
+     NodeStatus sysNodeStatus = 2;
+
+}
